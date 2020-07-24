@@ -34,7 +34,7 @@ double UltraSonicDistanceSensor::measureDistanceCm(float pTemperature) {
     double distanceCm = durationMicroSec / 2.0 * speedOfSoundInCmPerMs;
     if (distanceCm == 0 || distanceCm > 400) {
         return -1.0 ;
-    } else {
-        return distanceCm;
-    }
+    } 
+
+	return distanceCm;
 }
