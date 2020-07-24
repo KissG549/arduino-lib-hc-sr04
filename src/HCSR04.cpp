@@ -7,11 +7,11 @@
 #include "HCSR04.h"
 
 UltraSonicDistanceSensor::UltraSonicDistanceSensor(
-        int triggerPin, int echoPin) {
-    this->triggerPin = triggerPin;
-    this->echoPin = echoPin;
-    pinMode(triggerPin, OUTPUT);
-    pinMode(echoPin, INPUT);
+        int pTriggerPin, int pEchoPin) 
+	: mTriggerPin(pTriggerPin), mEchoPin(pEchoPin)
+{
+    pinMode(mTriggerPin, OUTPUT);
+    pinMode(mEchoPin, INPUT);
 }
 
 double UltraSonicDistanceSensor::measureDistanceCm() {
@@ -19,18 +19,18 @@ double UltraSonicDistanceSensor::measureDistanceCm() {
     return measureDistanceCm(19.307);
 }
 
-double UltraSonicDistanceSensor::measureDistanceCm(float temperature) {
+double UltraSonicDistanceSensor::measureDistanceCm(float pTemperature) {
     // Make sure that trigger pin is LOW.
-    digitalWrite(triggerPin, LOW);
+    digitalWrite(mTriggerPin, LOW);
     delayMicroseconds(2);
     // Hold trigger for 10 microseconds, which is signal for sensor to measure distance.
-    digitalWrite(triggerPin, HIGH);
+    digitalWrite(mTriggerPin, HIGH);
     delayMicroseconds(10);
-    digitalWrite(triggerPin, LOW);
+    digitalWrite(mTriggerPin, LOW);
     // Measure the length of echo signal, which is equal to the time needed for sound to go there and back.
-    unsigned long durationMicroSec = pulseIn(echoPin, HIGH);
+    unsigned long durationMicroSec = pulseIn(mEchoPin, HIGH);
 
-    double speedOfSoundInCmPerMs = 0.03313 + 0.0000606 * temperature; // Cair ≈ (331.3 + 0.606 ⋅ ϑ) m/s
+    double speedOfSoundInCmPerMs = 0.03313 + 0.0000606 * pTemperature; // Cair ≈ (331.3 + 0.606 ⋅ ϑ) m/s
     double distanceCm = durationMicroSec / 2.0 * speedOfSoundInCmPerMs;
     if (distanceCm == 0 || distanceCm > 400) {
         return -1.0 ;

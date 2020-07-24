@@ -14,7 +14,7 @@ class UltraSonicDistanceSensor {
      * @param triggerPin  Digital pin that is used for controlling sensor (output).
      * @param echoPin  Digital pin that is used to get information from sensor (input).
      */
-    UltraSonicDistanceSensor(int triggerPin, int echoPin);
+    UltraSonicDistanceSensor(int pTriggerPin, int pEchoPin);
 
     /**
      * Measures distance by sending ultrasonic waves and measuring time it takes them
@@ -29,9 +29,9 @@ class UltraSonicDistanceSensor {
      * @param temperature  Temperature in degrees celsius
      * @returns Distance in centimeters, or negative value if distance is greater than 400cm.
      */
-    double measureDistanceCm(float temperature);
+    double measureDistanceCm(float pTemperature);
  private:
-    int triggerPin, echoPin;
+    int mTriggerPin, mEchoPin;
 };
 
 #endif // HCSR04_H
