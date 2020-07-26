@@ -15,14 +15,17 @@ UltraSonicDistanceSensor::UltraSonicDistanceSensor(
 }
 
 double UltraSonicDistanceSensor::measureDistanceCm() {
+double UltraSonicDistanceSensor::measureDistanceCm() 
+{
     //Using the approximate formula 19.307°C results in roughly 343m/s which is the commonly used value for air.
     return measureDistanceCm(19.307);
 }
 
-double UltraSonicDistanceSensor::measureDistanceCm(float pTemperature) {
+double UltraSonicDistanceSensor::measureDistanceCm(float pTemperature) 
+{
     // Make sure that trigger pin is LOW.
     digitalWrite(mTriggerPin, LOW);
-    delayMicroseconds(2);
+    delayMicroseconds(5);
     // Hold trigger for 10 microseconds, which is signal for sensor to measure distance.
     digitalWrite(mTriggerPin, HIGH);
     delayMicroseconds(10);
@@ -32,7 +35,8 @@ double UltraSonicDistanceSensor::measureDistanceCm(float pTemperature) {
 
     double speedOfSoundInCmPerMs = 0.03313 + 0.0000606 * pTemperature; // Cair ≈ (331.3 + 0.606 ⋅ ϑ) m/s
     double distanceCm = durationMicroSec / 2.0 * speedOfSoundInCmPerMs;
-    if (distanceCm == 0 || distanceCm > 400) {
+    if (distanceCm == 0 || distanceCm > 400) 
+	{
         return -1.0 ;
     } 
 
