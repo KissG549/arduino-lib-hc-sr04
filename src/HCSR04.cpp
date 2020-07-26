@@ -14,7 +14,6 @@ UltraSonicDistanceSensor::UltraSonicDistanceSensor(
     pinMode(mEchoPin, INPUT);
 }
 
-double UltraSonicDistanceSensor::measureDistanceCm() {
 double UltraSonicDistanceSensor::measureDistanceCm() 
 {
     //Using the approximate formula 19.307°C results in roughly 343m/s which is the commonly used value for air.
